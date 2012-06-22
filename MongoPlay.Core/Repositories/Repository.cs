@@ -37,14 +37,21 @@ namespace MongoPlay.Data.Repositories
 
         public TEntity Delete(TEntity entity)
         {
-            var query = Query.EQ("id", entity.Id);
+            var query = Query<TEntity>.EQ(e=>e.Id, entity.Id);
             _collection.Remove(query, RemoveFlags.Single);
             return entity;
         }
 
-        public IEnumerable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> criteria, int skip = 0, int? take = null)
+        public IEnumerable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> criteria)
         {
             var result = _collection.AsQueryable().Where(criteria);
+            return result;
+        }
+
+        public IEnumerable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> criteria, 
+            System.Linq.Expressions.Expression<Func<TEntity, object>> orderBy, int skip = 0, int? take = null)
+        {
+            var result = (IQueryable<TEntity>)_collection.AsQueryable().Where(criteria).OrderBy(orderBy);
             if (skip > 0)
                 result = result.Skip(skip);
             if (take.HasValue)
@@ -65,7 +72,11 @@ namespace MongoPlay.Data.Repositories
 
         public TEntity Update(TEntity entityToUpdate)
         {
-            throw new NotImplementedException();
+            var query = Query<TEntity>.EQ(e=>e.Id, entityToUpdate.Id);
+            var update = Update<TEntity>.Replace(entityToUpdate);
+            _collection.Update(query, update);
+
+            return entityToUpdate;
         }
     }
 }

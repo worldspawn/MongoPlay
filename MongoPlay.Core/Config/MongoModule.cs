@@ -15,7 +15,8 @@ namespace MongoPlay.Core.Config
                 return MongoServer.Create();
             }).SingleInstance();
 
-            builder.Register((context)=>{
+            builder.Register((context) =>
+            {
                 var mongoServer = context.Resolve<MongoServer>();
                 return mongoServer.GetDatabase("todolist");
             }).SingleInstance();

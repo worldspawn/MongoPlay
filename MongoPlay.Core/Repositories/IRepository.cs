@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 namespace MongoPlay.Core.Repositories
 {
     public interface IRepository<TEntity>
      where TEntity : global::MongoPlay.Data.Entities.Entity
     {
-        bool Any(global::System.Linq.Expressions.Expression<Func<TEntity, bool>> criteria);
+        bool Any(Expression<Func<TEntity, bool>> criteria);
         TEntity ById(Guid id);
-        int Count(global::System.Linq.Expressions.Expression<Func<TEntity, bool>> criteria);
+        int Count(Expression<Func<TEntity, bool>> criteria);
         TEntity Delete(TEntity entity);
-        global::System.Collections.Generic.IEnumerable<TEntity> Find(global::System.Linq.Expressions.Expression<Func<TEntity, bool>> criteria, int skip = 0, int? take = null);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> criteria);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> criteria, Expression<Func<TEntity, object>> orderBy, int skip = 0, int? take = null);
         TEntity Insert(TEntity entity);
         TEntity Update(TEntity entityToUpdate);
     }

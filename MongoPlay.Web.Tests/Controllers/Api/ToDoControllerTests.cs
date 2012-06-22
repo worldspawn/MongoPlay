@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
-using MongoPlay.Core.Repositories;
 using MongoPlay.Data.Entities;
 using MongoPlay.Web.Controllers.Api;
 using MongoPlay.Web.Tests.Common;
-using NSubstitute;
 using Xunit;
 
 namespace MongoPlay.Web.Tests.Controllers.Api
@@ -47,6 +41,59 @@ namespace MongoPlay.Web.Tests.Controllers.Api
 
             var id = Guid.NewGuid();
             Assert.Throws<HttpResponseException>(() => controller.GetTodo(id));
+        }
+
+        [Fact]
+        public void UpdateWorks()
+        {
+            var todoRepository = TestHelpers.CreateMockRepository<ToDoItem>();
+            var controller = new ToDoController(todoRepository);
+
+            var item = new Web.Models.ToDoItem();
+            item.Title = "Test Title";
+            item.Item = "Test Item";
+            item = controller.PostToDo(item);
+
+            item.Title = "Modded Title";
+            item = controller.PutToDo(item);
+
+            Assert.NotNull(item);
+            Assert.Equal("Modded Title", item.Title);
+        }
+
+        [Fact]
+        public void DeleteWorks()
+        {
+            var todoRepository = TestHelpers.CreateMockRepository<ToDoItem>();
+            var controller = new ToDoController(todoRepository);
+
+            var item = new Web.Models.ToDoItem();
+            item.Title = "Test Title";
+            item.Item = "Test Item";
+            item = controller.PostToDo(item);
+
+            item = controller.DeleteToDo(item.Id);
+            Assert.NotNull(item);
+        }
+
+        [Fact]
+        public void DeleteThrows404WhenIdNotFound()
+        {
+            var todoRepository = TestHelpers.CreateMockRepository<ToDoItem>();
+            var controller = new ToDoController(todoRepository);
+
+            var id = Guid.NewGuid();
+            Assert.Throws<HttpResponseException>(() => controller.DeleteToDo(id));
+        }
+
+        [Fact]
+        public void UpdateThrows404WhenIdNotFound()
+        {
+            var todoRepository = TestHelpers.CreateMockRepository<ToDoItem>();
+            var controller = new ToDoController(todoRepository);
+
+            var item = new Web.Models.ToDoItem();
+            Assert.Throws<HttpResponseException>(() => controller.PutToDo(item));
         }
     }
 }

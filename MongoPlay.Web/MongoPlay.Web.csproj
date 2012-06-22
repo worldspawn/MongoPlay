@@ -145,15 +145,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js">
-      <DependentUpon>jquery-1.6.4.js</DependentUpon>
+    <None Include="Scripts\jquery-1.7.2.intellisense.js">
+      <DependentUpon>jquery-1.7.2.js</DependentUpon>
+    </None>
+    <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\jquery-1.7.2.min.js">
+      <DependentUpon>jquery-1.7.2.js</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery.signalR-0.5.1.js" />
     <Content Include="Scripts\jquery.signalR-0.5.1.min.js">
       <DependentUpon>jquery.signalR-0.5.1.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\todo.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

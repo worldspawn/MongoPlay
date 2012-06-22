@@ -46,5 +46,16 @@ namespace MongoPlay.Web.Controllers.Api
 
             return toDoItem;
         }
+
+        public ToDoItem DeleteToDo(Guid id)
+        {
+            var entity = _todoRepository.ById(id);
+            if (entity == null)
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+
+            _todoRepository.Delete(entity);
+
+            return new ToDoItem(entity);
+        }
     }
 }
