@@ -5,9 +5,9 @@ using System.Web;
 using Autofac;
 using MongoDB.Driver;
 
-namespace MongoPlay.Web.Config
+namespace MongoPlay.Core.Config
 {
-    public class ServicesModule : Autofac.Module
+    public class MongoModule : Autofac.Module
     {
         protected override void Load(Autofac.ContainerBuilder builder)
         {

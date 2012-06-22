@@ -9,7 +9,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Autofac.Integration.Mvc;
-using MongoPlay.Web.Config;
+using MongoPlay.Core.Config;
 
 namespace MongoPlay.Web
 {
@@ -25,7 +25,7 @@ namespace MongoPlay.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             var builder = new ContainerBuilder();
-            builder.RegisterModule<ServicesModule>();
+            builder.RegisterModule<MongoModule>();
 
             // Register API controllers using assembly scanning.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());

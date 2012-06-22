@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8B63DD
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlay.Data", "MongoPlay.Data\MongoPlay.Data.csproj", "{487B2A1F-DB98-4DFF-889B-F546BCD410B3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlay.Web.Tests", "MongoPlay.Web.Tests\MongoPlay.Web.Tests.csproj", "{28B528BA-17A7-4E1E-B5E7-65AC0E476235}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlay.Core", "MongoPlay.Core\MongoPlay.Core.csproj", "{487B2A1F-DB98-4DFF-889B-F546BCD410B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoPlay.Core.Tests", "MongoPlay.Core.Tests\MongoPlay.Core.Tests.csproj", "{867DA1DF-2BE8-4C6F-8D83-AC862A667C00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{487B2A1F-DB98-4DFF-889B-F546BCD410B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487B2A1F-DB98-4DFF-889B-F546BCD410B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487B2A1F-DB98-4DFF-889B-F546BCD410B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{867DA1DF-2BE8-4C6F-8D83-AC862A667C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867DA1DF-2BE8-4C6F-8D83-AC862A667C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867DA1DF-2BE8-4C6F-8D83-AC862A667C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867DA1DF-2BE8-4C6F-8D83-AC862A667C00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC5E28E2-3D0E-414B-BFD3-ADB6D6BD2572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC5E28E2-3D0E-414B-BFD3-ADB6D6BD2572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC5E28E2-3D0E-414B-BFD3-ADB6D6BD2572}.Release|Any CPU.ActiveCfg = Release|Any CPU

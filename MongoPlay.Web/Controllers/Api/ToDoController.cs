@@ -1,33 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using MongoDB.Driver;
+using MongoPlay.Core.Repositories;
 using MongoPlay.Web.Models;
 
 namespace MongoPlay.Web.Controllers.Api
 {
     public class ToDoController : ApiController
     {
-        private readonly MongoDatabase _database;
-        
-        public ToDoController(MongoDatabase database)
+        private readonly IRepository<Data.Entities.ToDoItem> _todoRepository;
+
+        public ToDoController(IRepository<Data.Entities.ToDoItem> todoRepository)
         {
-            _database = database;
+            _todoRepository = todoRepository;
         }
 
-        public ToDoItem GetTodo(int id)
+        public ToDoItem GetTodo(Guid id)
         {
-            return new ToDoItem { Title = "Title", Item = "Something" };
+            var entity = _todoRepository.ById(id);
+            if (entity == null)
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+
+            return new Models.ToDoItem(_todoRepository.ById(id));
         }
 
         public ToDoItem PostToDo(ToDoItem toDoItem)
         {
-            var todoItems = _database.GetCollection<ToDoItem>("todo");
-            var x = todoItems.Insert(toDoItem);
-            
+            var entity = new Data.Entities.ToDoItem(toDoItem.Item, toDoItem.Title);
+            entity = _todoRepository.Insert(entity);
+
+            return new ToDoItem(entity);
+        }
+
+        public ToDoItem PutToDo(ToDoItem toDoItem)
+        {
+            var entity = _todoRepository.ById(toDoItem.Id);
+            if (entity == null)
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+
+            entity.Title = toDoItem.Title;
+            entity.Item = toDoItem.Item;
+
+            _todoRepository.Update(entity);
+
+            return toDoItem;
         }
     }
 }
